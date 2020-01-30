@@ -1,0 +1,610 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>opentelemetry.ext.jaeger.gen.jaeger.ttypes &mdash; OpenTelemetry  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="opentelemetry.ext.opentracing_shim package" href="opentelemetry.ext.opentracing_shim.html" />
+    <link rel="prev" title="opentelemetry.ext.jaeger package" href="opentelemetry.ext.jaeger.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> OpenTelemetry
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">OpenTelemetry API:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="opentelemetry.context.html">opentelemetry.context package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="opentelemetry.metrics.html">opentelemetry.metrics package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="opentelemetry.trace.html">opentelemetry.trace package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="opentelemetry.util.loader.html">opentelemetry.util.loader module</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OpenTelemetry SDK:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="opentelemetry.sdk.context.html">opentelemetry.sdk.context</a></li>
+<li class="toctree-l1"><a class="reference internal" href="opentelemetry.sdk.metrics.html">opentelemetry.sdk.metrics package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="opentelemetry.sdk.trace.html">opentelemetry.sdk.trace package</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OpenTelemetry Integrations:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="opentelemetry.ext.flask.html">opentelemetry.ext.flask package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="opentelemetry.ext.http_requests.html">opentelemetry.ext.http_requests package</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="opentelemetry.ext.jaeger.html">opentelemetry.ext.jaeger package</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="opentelemetry.ext.jaeger.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">opentelemetry.ext.jaeger.gen.jaeger.ttypes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#module-opentelemetry.ext.jaeger.gen.jaeger.ttypes">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="opentelemetry.ext.jaeger.html#module-opentelemetry.ext.jaeger">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="opentelemetry.ext.opentracing_shim.html">opentelemetry.ext.opentracing_shim package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="opentelemetry.ext.pymongo.html">opentelemetry.ext.pymongo package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="opentelemetry.ext.wsgi.html">opentelemetry.ext.wsgi package</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">OpenTelemetry</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="opentelemetry.ext.jaeger.html">opentelemetry.ext.jaeger package</a> &raquo;</li>
+        
+      <li>opentelemetry.ext.jaeger.gen.jaeger.ttypes</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/opentelemetry.ext.jaeger.gen.jaeger.ttypes.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="opentelemetry-ext-jaeger-gen-jaeger-ttypes">
+<h1>opentelemetry.ext.jaeger.gen.jaeger.ttypes<a class="headerlink" href="#opentelemetry-ext-jaeger-gen-jaeger-ttypes" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-opentelemetry.ext.jaeger.gen.jaeger.ttypes">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-opentelemetry.ext.jaeger.gen.jaeger.ttypes" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="opentelemetry.ext.jaeger.gen.jaeger.ttypes.TagType">
+<em class="property">class </em><code class="sig-prename descclassname">opentelemetry.ext.jaeger.gen.jaeger.ttypes.</code><code class="sig-name descname">TagType</code><a class="reference internal" href="_modules/opentelemetry/ext/jaeger/gen/jaeger/ttypes.html#TagType"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#opentelemetry.ext.jaeger.gen.jaeger.ttypes.TagType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dl class="attribute">
+<dt id="opentelemetry.ext.jaeger.gen.jaeger.ttypes.TagType.STRING">
+<code class="sig-name descname">STRING</code><em class="property"> = 0</em><a class="headerlink" href="#opentelemetry.ext.jaeger.gen.jaeger.ttypes.TagType.STRING" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="opentelemetry.ext.jaeger.gen.jaeger.ttypes.TagType.DOUBLE">
+<code class="sig-name descname">DOUBLE</code><em class="property"> = 1</em><a class="headerlink" href="#opentelemetry.ext.jaeger.gen.jaeger.ttypes.TagType.DOUBLE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="opentelemetry.ext.jaeger.gen.jaeger.ttypes.TagType.BOOL">
+<code class="sig-name descname">BOOL</code><em class="property"> = 2</em><a class="headerlink" href="#opentelemetry.ext.jaeger.gen.jaeger.ttypes.TagType.BOOL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="opentelemetry.ext.jaeger.gen.jaeger.ttypes.TagType.LONG">
+<code class="sig-name descname">LONG</code><em class="property"> = 3</em><a class="headerlink" href="#opentelemetry.ext.jaeger.gen.jaeger.ttypes.TagType.LONG" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="opentelemetry.ext.jaeger.gen.jaeger.ttypes.TagType.BINARY">
+<code class="sig-name descname">BINARY</code><em class="property"> = 4</em><a class="headerlink" href="#opentelemetry.ext.jaeger.gen.jaeger.ttypes.TagType.BINARY" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="opentelemetry.ext.jaeger.gen.jaeger.ttypes.SpanRefType">
+<em class="property">class </em><code class="sig-prename descclassname">opentelemetry.ext.jaeger.gen.jaeger.ttypes.</code><code class="sig-name descname">SpanRefType</code><a class="reference internal" href="_modules/opentelemetry/ext/jaeger/gen/jaeger/ttypes.html#SpanRefType"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#opentelemetry.ext.jaeger.gen.jaeger.ttypes.SpanRefType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dl class="attribute">
+<dt id="opentelemetry.ext.jaeger.gen.jaeger.ttypes.SpanRefType.CHILD_OF">
+<code class="sig-name descname">CHILD_OF</code><em class="property"> = 0</em><a class="headerlink" href="#opentelemetry.ext.jaeger.gen.jaeger.ttypes.SpanRefType.CHILD_OF" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="opentelemetry.ext.jaeger.gen.jaeger.ttypes.SpanRefType.FOLLOWS_FROM">
+<code class="sig-name descname">FOLLOWS_FROM</code><em class="property"> = 1</em><a class="headerlink" href="#opentelemetry.ext.jaeger.gen.jaeger.ttypes.SpanRefType.FOLLOWS_FROM" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="opentelemetry.ext.jaeger.gen.jaeger.ttypes.Tag">
+<em class="property">class </em><code class="sig-prename descclassname">opentelemetry.ext.jaeger.gen.jaeger.ttypes.</code><code class="sig-name descname">Tag</code><span class="sig-paren">(</span><em class="sig-param">key=None</em>, <em class="sig-param">vType=None</em>, <em class="sig-param">vStr=None</em>, <em class="sig-param">vDouble=None</em>, <em class="sig-param">vBool=None</em>, <em class="sig-param">vLong=None</em>, <em class="sig-param">vBinary=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/opentelemetry/ext/jaeger/gen/jaeger/ttypes.html#Tag"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#opentelemetry.ext.jaeger.gen.jaeger.ttypes.Tag" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dl class="attribute">
+<dt>
+<code class="sig-name descname">- key</code></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="sig-name descname">- vType</code></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="sig-name descname">- vStr</code></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="sig-name descname">- vDouble</code></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="sig-name descname">- vBool</code></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="sig-name descname">- vLong</code></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="sig-name descname">- vBinary</code></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="opentelemetry.ext.jaeger.gen.jaeger.ttypes.Tag.thrift_spec">
+<code class="sig-name descname">thrift_spec</code><em class="property"> = (None, (1, 11, 'key', 'UTF8', None), (2, 8, 'vType', None, None), (3, 11, 'vStr', 'UTF8', None), (4, 4, 'vDouble', None, None), (5, 2, 'vBool', None, None), (6, 10, 'vLong', None, None), (7, 11, 'vBinary', 'BINARY', None))</em><a class="headerlink" href="#opentelemetry.ext.jaeger.gen.jaeger.ttypes.Tag.thrift_spec" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="opentelemetry.ext.jaeger.gen.jaeger.ttypes.Tag.read">
+<code class="sig-name descname">read</code><span class="sig-paren">(</span><em class="sig-param">iprot</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/opentelemetry/ext/jaeger/gen/jaeger/ttypes.html#Tag.read"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#opentelemetry.ext.jaeger.gen.jaeger.ttypes.Tag.read" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="opentelemetry.ext.jaeger.gen.jaeger.ttypes.Tag.write">
+<code class="sig-name descname">write</code><span class="sig-paren">(</span><em class="sig-param">oprot</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/opentelemetry/ext/jaeger/gen/jaeger/ttypes.html#Tag.write"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#opentelemetry.ext.jaeger.gen.jaeger.ttypes.Tag.write" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="opentelemetry.ext.jaeger.gen.jaeger.ttypes.Tag.validate">
+<code class="sig-name descname">validate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/opentelemetry/ext/jaeger/gen/jaeger/ttypes.html#Tag.validate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#opentelemetry.ext.jaeger.gen.jaeger.ttypes.Tag.validate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="opentelemetry.ext.jaeger.gen.jaeger.ttypes.Log">
+<em class="property">class </em><code class="sig-prename descclassname">opentelemetry.ext.jaeger.gen.jaeger.ttypes.</code><code class="sig-name descname">Log</code><span class="sig-paren">(</span><em class="sig-param">timestamp=None</em>, <em class="sig-param">fields=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/opentelemetry/ext/jaeger/gen/jaeger/ttypes.html#Log"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#opentelemetry.ext.jaeger.gen.jaeger.ttypes.Log" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dl class="attribute">
+<dt>
+<code class="sig-name descname">- timestamp</code></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="sig-name descname">- fields</code></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="opentelemetry.ext.jaeger.gen.jaeger.ttypes.Log.thrift_spec">
+<code class="sig-name descname">thrift_spec</code><em class="property"> = (None, (1, 10, 'timestamp', None, None), (2, 15, 'fields', (12, (&lt;class 'opentelemetry.ext.jaeger.gen.jaeger.ttypes.Tag'&gt;, (None, (1, 11, 'key', 'UTF8', None), (2, 8, 'vType', None, None), (3, 11, 'vStr', 'UTF8', None), (4, 4, 'vDouble', None, None), (5, 2, 'vBool', None, None), (6, 10, 'vLong', None, None), (7, 11, 'vBinary', 'BINARY', None))), False), None))</em><a class="headerlink" href="#opentelemetry.ext.jaeger.gen.jaeger.ttypes.Log.thrift_spec" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="opentelemetry.ext.jaeger.gen.jaeger.ttypes.Log.read">
+<code class="sig-name descname">read</code><span class="sig-paren">(</span><em class="sig-param">iprot</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/opentelemetry/ext/jaeger/gen/jaeger/ttypes.html#Log.read"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#opentelemetry.ext.jaeger.gen.jaeger.ttypes.Log.read" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="opentelemetry.ext.jaeger.gen.jaeger.ttypes.Log.write">
+<code class="sig-name descname">write</code><span class="sig-paren">(</span><em class="sig-param">oprot</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/opentelemetry/ext/jaeger/gen/jaeger/ttypes.html#Log.write"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#opentelemetry.ext.jaeger.gen.jaeger.ttypes.Log.write" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="opentelemetry.ext.jaeger.gen.jaeger.ttypes.Log.validate">
+<code class="sig-name descname">validate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/opentelemetry/ext/jaeger/gen/jaeger/ttypes.html#Log.validate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#opentelemetry.ext.jaeger.gen.jaeger.ttypes.Log.validate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="opentelemetry.ext.jaeger.gen.jaeger.ttypes.SpanRef">
+<em class="property">class </em><code class="sig-prename descclassname">opentelemetry.ext.jaeger.gen.jaeger.ttypes.</code><code class="sig-name descname">SpanRef</code><span class="sig-paren">(</span><em class="sig-param">refType=None</em>, <em class="sig-param">traceIdLow=None</em>, <em class="sig-param">traceIdHigh=None</em>, <em class="sig-param">spanId=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/opentelemetry/ext/jaeger/gen/jaeger/ttypes.html#SpanRef"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#opentelemetry.ext.jaeger.gen.jaeger.ttypes.SpanRef" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dl class="attribute">
+<dt>
+<code class="sig-name descname">- refType</code></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="sig-name descname">- traceIdLow</code></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="sig-name descname">- traceIdHigh</code></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="sig-name descname">- spanId</code></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="opentelemetry.ext.jaeger.gen.jaeger.ttypes.SpanRef.thrift_spec">
+<code class="sig-name descname">thrift_spec</code><em class="property"> = (None, (1, 8, 'refType', None, None), (2, 10, 'traceIdLow', None, None), (3, 10, 'traceIdHigh', None, None), (4, 10, 'spanId', None, None))</em><a class="headerlink" href="#opentelemetry.ext.jaeger.gen.jaeger.ttypes.SpanRef.thrift_spec" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="opentelemetry.ext.jaeger.gen.jaeger.ttypes.SpanRef.read">
+<code class="sig-name descname">read</code><span class="sig-paren">(</span><em class="sig-param">iprot</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/opentelemetry/ext/jaeger/gen/jaeger/ttypes.html#SpanRef.read"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#opentelemetry.ext.jaeger.gen.jaeger.ttypes.SpanRef.read" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="opentelemetry.ext.jaeger.gen.jaeger.ttypes.SpanRef.write">
+<code class="sig-name descname">write</code><span class="sig-paren">(</span><em class="sig-param">oprot</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/opentelemetry/ext/jaeger/gen/jaeger/ttypes.html#SpanRef.write"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#opentelemetry.ext.jaeger.gen.jaeger.ttypes.SpanRef.write" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="opentelemetry.ext.jaeger.gen.jaeger.ttypes.SpanRef.validate">
+<code class="sig-name descname">validate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/opentelemetry/ext/jaeger/gen/jaeger/ttypes.html#SpanRef.validate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#opentelemetry.ext.jaeger.gen.jaeger.ttypes.SpanRef.validate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="opentelemetry.ext.jaeger.gen.jaeger.ttypes.Span">
+<em class="property">class </em><code class="sig-prename descclassname">opentelemetry.ext.jaeger.gen.jaeger.ttypes.</code><code class="sig-name descname">Span</code><span class="sig-paren">(</span><em class="sig-param">traceIdLow=None</em>, <em class="sig-param">traceIdHigh=None</em>, <em class="sig-param">spanId=None</em>, <em class="sig-param">parentSpanId=None</em>, <em class="sig-param">operationName=None</em>, <em class="sig-param">references=None</em>, <em class="sig-param">flags=None</em>, <em class="sig-param">startTime=None</em>, <em class="sig-param">duration=None</em>, <em class="sig-param">tags=None</em>, <em class="sig-param">logs=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/opentelemetry/ext/jaeger/gen/jaeger/ttypes.html#Span"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#opentelemetry.ext.jaeger.gen.jaeger.ttypes.Span" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dl class="attribute">
+<dt>
+<code class="sig-name descname">- traceIdLow</code></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="sig-name descname">- traceIdHigh</code></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="sig-name descname">- spanId</code></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="sig-name descname">- parentSpanId</code></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="sig-name descname">- operationName</code></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="sig-name descname">- references</code></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="sig-name descname">- flags</code></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="sig-name descname">- startTime</code></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="sig-name descname">- duration</code></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="sig-name descname">- tags</code></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="sig-name descname">- logs</code></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="opentelemetry.ext.jaeger.gen.jaeger.ttypes.Span.thrift_spec">
+<code class="sig-name descname">thrift_spec</code><em class="property"> = (None, (1, 10, 'traceIdLow', None, None), (2, 10, 'traceIdHigh', None, None), (3, 10, 'spanId', None, None), (4, 10, 'parentSpanId', None, None), (5, 11, 'operationName', 'UTF8', None), (6, 15, 'references', (12, (&lt;class 'opentelemetry.ext.jaeger.gen.jaeger.ttypes.SpanRef'&gt;, (None, (1, 8, 'refType', None, None), (2, 10, 'traceIdLow', None, None), (3, 10, 'traceIdHigh', None, None), (4, 10, 'spanId', None, None))), False), None), (7, 8, 'flags', None, None), (8, 10, 'startTime', None, None), (9, 10, 'duration', None, None), (10, 15, 'tags', (12, (&lt;class 'opentelemetry.ext.jaeger.gen.jaeger.ttypes.Tag'&gt;, (None, (1, 11, 'key', 'UTF8', None), (2, 8, 'vType', None, None), (3, 11, 'vStr', 'UTF8', None), (4, 4, 'vDouble', None, None), (5, 2, 'vBool', None, None), (6, 10, 'vLong', None, None), (7, 11, 'vBinary', 'BINARY', None))), False), None), (11, 15, 'logs', (12, (&lt;class 'opentelemetry.ext.jaeger.gen.jaeger.ttypes.Log'&gt;, (None, (1, 10, 'timestamp', None, None), (2, 15, 'fields', (12, (&lt;class 'opentelemetry.ext.jaeger.gen.jaeger.ttypes.Tag'&gt;, (None, (1, 11, 'key', 'UTF8', None), (2, 8, 'vType', None, None), (3, 11, 'vStr', 'UTF8', None), (4, 4, 'vDouble', None, None), (5, 2, 'vBool', None, None), (6, 10, 'vLong', None, None), (7, 11, 'vBinary', 'BINARY', None))), False), None))), False), None))</em><a class="headerlink" href="#opentelemetry.ext.jaeger.gen.jaeger.ttypes.Span.thrift_spec" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="opentelemetry.ext.jaeger.gen.jaeger.ttypes.Span.read">
+<code class="sig-name descname">read</code><span class="sig-paren">(</span><em class="sig-param">iprot</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/opentelemetry/ext/jaeger/gen/jaeger/ttypes.html#Span.read"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#opentelemetry.ext.jaeger.gen.jaeger.ttypes.Span.read" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="opentelemetry.ext.jaeger.gen.jaeger.ttypes.Span.write">
+<code class="sig-name descname">write</code><span class="sig-paren">(</span><em class="sig-param">oprot</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/opentelemetry/ext/jaeger/gen/jaeger/ttypes.html#Span.write"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#opentelemetry.ext.jaeger.gen.jaeger.ttypes.Span.write" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="opentelemetry.ext.jaeger.gen.jaeger.ttypes.Span.validate">
+<code class="sig-name descname">validate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/opentelemetry/ext/jaeger/gen/jaeger/ttypes.html#Span.validate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#opentelemetry.ext.jaeger.gen.jaeger.ttypes.Span.validate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="opentelemetry.ext.jaeger.gen.jaeger.ttypes.Process">
+<em class="property">class </em><code class="sig-prename descclassname">opentelemetry.ext.jaeger.gen.jaeger.ttypes.</code><code class="sig-name descname">Process</code><span class="sig-paren">(</span><em class="sig-param">serviceName=None</em>, <em class="sig-param">tags=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/opentelemetry/ext/jaeger/gen/jaeger/ttypes.html#Process"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#opentelemetry.ext.jaeger.gen.jaeger.ttypes.Process" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dl class="attribute">
+<dt>
+<code class="sig-name descname">- serviceName</code></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="sig-name descname">- tags</code></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="opentelemetry.ext.jaeger.gen.jaeger.ttypes.Process.thrift_spec">
+<code class="sig-name descname">thrift_spec</code><em class="property"> = (None, (1, 11, 'serviceName', 'UTF8', None), (2, 15, 'tags', (12, (&lt;class 'opentelemetry.ext.jaeger.gen.jaeger.ttypes.Tag'&gt;, (None, (1, 11, 'key', 'UTF8', None), (2, 8, 'vType', None, None), (3, 11, 'vStr', 'UTF8', None), (4, 4, 'vDouble', None, None), (5, 2, 'vBool', None, None), (6, 10, 'vLong', None, None), (7, 11, 'vBinary', 'BINARY', None))), False), None))</em><a class="headerlink" href="#opentelemetry.ext.jaeger.gen.jaeger.ttypes.Process.thrift_spec" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="opentelemetry.ext.jaeger.gen.jaeger.ttypes.Process.read">
+<code class="sig-name descname">read</code><span class="sig-paren">(</span><em class="sig-param">iprot</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/opentelemetry/ext/jaeger/gen/jaeger/ttypes.html#Process.read"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#opentelemetry.ext.jaeger.gen.jaeger.ttypes.Process.read" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="opentelemetry.ext.jaeger.gen.jaeger.ttypes.Process.write">
+<code class="sig-name descname">write</code><span class="sig-paren">(</span><em class="sig-param">oprot</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/opentelemetry/ext/jaeger/gen/jaeger/ttypes.html#Process.write"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#opentelemetry.ext.jaeger.gen.jaeger.ttypes.Process.write" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="opentelemetry.ext.jaeger.gen.jaeger.ttypes.Process.validate">
+<code class="sig-name descname">validate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/opentelemetry/ext/jaeger/gen/jaeger/ttypes.html#Process.validate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#opentelemetry.ext.jaeger.gen.jaeger.ttypes.Process.validate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="opentelemetry.ext.jaeger.gen.jaeger.ttypes.Batch">
+<em class="property">class </em><code class="sig-prename descclassname">opentelemetry.ext.jaeger.gen.jaeger.ttypes.</code><code class="sig-name descname">Batch</code><span class="sig-paren">(</span><em class="sig-param">process=None</em>, <em class="sig-param">spans=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/opentelemetry/ext/jaeger/gen/jaeger/ttypes.html#Batch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#opentelemetry.ext.jaeger.gen.jaeger.ttypes.Batch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dl class="attribute">
+<dt>
+<code class="sig-name descname">- process</code></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="sig-name descname">- spans</code></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="opentelemetry.ext.jaeger.gen.jaeger.ttypes.Batch.thrift_spec">
+<code class="sig-name descname">thrift_spec</code><em class="property"> = (None, (1, 12, 'process', (&lt;class 'opentelemetry.ext.jaeger.gen.jaeger.ttypes.Process'&gt;, (None, (1, 11, 'serviceName', 'UTF8', None), (2, 15, 'tags', (12, (&lt;class 'opentelemetry.ext.jaeger.gen.jaeger.ttypes.Tag'&gt;, (None, (1, 11, 'key', 'UTF8', None), (2, 8, 'vType', None, None), (3, 11, 'vStr', 'UTF8', None), (4, 4, 'vDouble', None, None), (5, 2, 'vBool', None, None), (6, 10, 'vLong', None, None), (7, 11, 'vBinary', 'BINARY', None))), False), None))), None), (2, 15, 'spans', (12, (&lt;class 'opentelemetry.ext.jaeger.gen.jaeger.ttypes.Span'&gt;, (None, (1, 10, 'traceIdLow', None, None), (2, 10, 'traceIdHigh', None, None), (3, 10, 'spanId', None, None), (4, 10, 'parentSpanId', None, None), (5, 11, 'operationName', 'UTF8', None), (6, 15, 'references', (12, (&lt;class 'opentelemetry.ext.jaeger.gen.jaeger.ttypes.SpanRef'&gt;, (None, (1, 8, 'refType', None, None), (2, 10, 'traceIdLow', None, None), (3, 10, 'traceIdHigh', None, None), (4, 10, 'spanId', None, None))), False), None), (7, 8, 'flags', None, None), (8, 10, 'startTime', None, None), (9, 10, 'duration', None, None), (10, 15, 'tags', (12, (&lt;class 'opentelemetry.ext.jaeger.gen.jaeger.ttypes.Tag'&gt;, (None, (1, 11, 'key', 'UTF8', None), (2, 8, 'vType', None, None), (3, 11, 'vStr', 'UTF8', None), (4, 4, 'vDouble', None, None), (5, 2, 'vBool', None, None), (6, 10, 'vLong', None, None), (7, 11, 'vBinary', 'BINARY', None))), False), None), (11, 15, 'logs', (12, (&lt;class 'opentelemetry.ext.jaeger.gen.jaeger.ttypes.Log'&gt;, (None, (1, 10, 'timestamp', None, None), (2, 15, 'fields', (12, (&lt;class 'opentelemetry.ext.jaeger.gen.jaeger.ttypes.Tag'&gt;, (None, (1, 11, 'key', 'UTF8', None), (2, 8, 'vType', None, None), (3, 11, 'vStr', 'UTF8', None), (4, 4, 'vDouble', None, None), (5, 2, 'vBool', None, None), (6, 10, 'vLong', None, None), (7, 11, 'vBinary', 'BINARY', None))), False), None))), False), None))), False), None))</em><a class="headerlink" href="#opentelemetry.ext.jaeger.gen.jaeger.ttypes.Batch.thrift_spec" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="opentelemetry.ext.jaeger.gen.jaeger.ttypes.Batch.read">
+<code class="sig-name descname">read</code><span class="sig-paren">(</span><em class="sig-param">iprot</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/opentelemetry/ext/jaeger/gen/jaeger/ttypes.html#Batch.read"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#opentelemetry.ext.jaeger.gen.jaeger.ttypes.Batch.read" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="opentelemetry.ext.jaeger.gen.jaeger.ttypes.Batch.write">
+<code class="sig-name descname">write</code><span class="sig-paren">(</span><em class="sig-param">oprot</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/opentelemetry/ext/jaeger/gen/jaeger/ttypes.html#Batch.write"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#opentelemetry.ext.jaeger.gen.jaeger.ttypes.Batch.write" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="opentelemetry.ext.jaeger.gen.jaeger.ttypes.Batch.validate">
+<code class="sig-name descname">validate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/opentelemetry/ext/jaeger/gen/jaeger/ttypes.html#Batch.validate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#opentelemetry.ext.jaeger.gen.jaeger.ttypes.Batch.validate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="opentelemetry.ext.jaeger.gen.jaeger.ttypes.BatchSubmitResponse">
+<em class="property">class </em><code class="sig-prename descclassname">opentelemetry.ext.jaeger.gen.jaeger.ttypes.</code><code class="sig-name descname">BatchSubmitResponse</code><span class="sig-paren">(</span><em class="sig-param">ok=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/opentelemetry/ext/jaeger/gen/jaeger/ttypes.html#BatchSubmitResponse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#opentelemetry.ext.jaeger.gen.jaeger.ttypes.BatchSubmitResponse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dl class="attribute">
+<dt>
+<code class="sig-name descname">- ok</code></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="opentelemetry.ext.jaeger.gen.jaeger.ttypes.BatchSubmitResponse.thrift_spec">
+<code class="sig-name descname">thrift_spec</code><em class="property"> = (None, (1, 2, 'ok', None, None))</em><a class="headerlink" href="#opentelemetry.ext.jaeger.gen.jaeger.ttypes.BatchSubmitResponse.thrift_spec" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="opentelemetry.ext.jaeger.gen.jaeger.ttypes.BatchSubmitResponse.read">
+<code class="sig-name descname">read</code><span class="sig-paren">(</span><em class="sig-param">iprot</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/opentelemetry/ext/jaeger/gen/jaeger/ttypes.html#BatchSubmitResponse.read"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#opentelemetry.ext.jaeger.gen.jaeger.ttypes.BatchSubmitResponse.read" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="opentelemetry.ext.jaeger.gen.jaeger.ttypes.BatchSubmitResponse.write">
+<code class="sig-name descname">write</code><span class="sig-paren">(</span><em class="sig-param">oprot</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/opentelemetry/ext/jaeger/gen/jaeger/ttypes.html#BatchSubmitResponse.write"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#opentelemetry.ext.jaeger.gen.jaeger.ttypes.BatchSubmitResponse.write" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="opentelemetry.ext.jaeger.gen.jaeger.ttypes.BatchSubmitResponse.validate">
+<code class="sig-name descname">validate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/opentelemetry/ext/jaeger/gen/jaeger/ttypes.html#BatchSubmitResponse.validate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#opentelemetry.ext.jaeger.gen.jaeger.ttypes.BatchSubmitResponse.validate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="opentelemetry.ext.opentracing_shim.html" class="btn btn-neutral float-right" title="opentelemetry.ext.opentracing_shim package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="opentelemetry.ext.jaeger.html" class="btn btn-neutral float-left" title="opentelemetry.ext.jaeger package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, OpenTelemetry Authors
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

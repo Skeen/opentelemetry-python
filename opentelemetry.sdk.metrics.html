@@ -1,0 +1,467 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>opentelemetry.sdk.metrics package &mdash; OpenTelemetry  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="opentelemetry.sdk.trace package" href="opentelemetry.sdk.trace.html" />
+    <link rel="prev" title="opentelemetry.sdk.context" href="opentelemetry.sdk.context.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> OpenTelemetry
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">OpenTelemetry API:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="opentelemetry.context.html">opentelemetry.context package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="opentelemetry.metrics.html">opentelemetry.metrics package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="opentelemetry.trace.html">opentelemetry.trace package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="opentelemetry.util.loader.html">opentelemetry.util.loader module</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OpenTelemetry SDK:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="opentelemetry.sdk.context.html">opentelemetry.sdk.context</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">opentelemetry.sdk.metrics package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="opentelemetry.sdk.trace.html">opentelemetry.sdk.trace package</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OpenTelemetry Integrations:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="opentelemetry.ext.flask.html">opentelemetry.ext.flask package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="opentelemetry.ext.http_requests.html">opentelemetry.ext.http_requests package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="opentelemetry.ext.jaeger.html">opentelemetry.ext.jaeger package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="opentelemetry.ext.opentracing_shim.html">opentelemetry.ext.opentracing_shim package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="opentelemetry.ext.pymongo.html">opentelemetry.ext.pymongo package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="opentelemetry.ext.wsgi.html">opentelemetry.ext.wsgi package</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">OpenTelemetry</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>opentelemetry.sdk.metrics package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/opentelemetry.sdk.metrics.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-opentelemetry.sdk.metrics">
+<span id="opentelemetry-sdk-metrics-package"></span><h1>opentelemetry.sdk.metrics package<a class="headerlink" href="#module-opentelemetry.sdk.metrics" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="opentelemetry.sdk.metrics.LabelSet">
+<em class="property">class </em><code class="sig-prename descclassname">opentelemetry.sdk.metrics.</code><code class="sig-name descname">LabelSet</code><span class="sig-paren">(</span><em class="sig-param">labels=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/opentelemetry/sdk/metrics.html#LabelSet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#opentelemetry.sdk.metrics.LabelSet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="opentelemetry.metrics.html#opentelemetry.metrics.LabelSet" title="opentelemetry.metrics.LabelSet"><code class="xref py py-class docutils literal notranslate"><span class="pre">opentelemetry.metrics.LabelSet</span></code></a></p>
+<p>See <a class="reference internal" href="opentelemetry.metrics.html#opentelemetry.metrics.LabelSet" title="opentelemetry.metrics.LabelSet"><code class="xref any py py-class docutils literal notranslate"><span class="pre">opentelemetry.metrics.LabelSet</span></code></a>.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="opentelemetry.sdk.metrics.BaseHandle">
+<em class="property">class </em><code class="sig-prename descclassname">opentelemetry.sdk.metrics.</code><code class="sig-name descname">BaseHandle</code><span class="sig-paren">(</span><em class="sig-param">value_type</em>, <em class="sig-param">enabled</em>, <em class="sig-param">monotonic</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/opentelemetry/sdk/metrics.html#BaseHandle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#opentelemetry.sdk.metrics.BaseHandle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="opentelemetry.sdk.metrics.CounterHandle">
+<em class="property">class </em><code class="sig-prename descclassname">opentelemetry.sdk.metrics.</code><code class="sig-name descname">CounterHandle</code><span class="sig-paren">(</span><em class="sig-param">value_type</em>, <em class="sig-param">enabled</em>, <em class="sig-param">monotonic</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/opentelemetry/sdk/metrics.html#CounterHandle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#opentelemetry.sdk.metrics.CounterHandle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="opentelemetry.metrics.html#opentelemetry.metrics.CounterHandle" title="opentelemetry.metrics.CounterHandle"><code class="xref py py-class docutils literal notranslate"><span class="pre">opentelemetry.metrics.CounterHandle</span></code></a>, <a class="reference internal" href="#opentelemetry.sdk.metrics.BaseHandle" title="opentelemetry.sdk.metrics.BaseHandle"><code class="xref py py-class docutils literal notranslate"><span class="pre">opentelemetry.sdk.metrics.BaseHandle</span></code></a></p>
+<dl class="method">
+<dt id="opentelemetry.sdk.metrics.CounterHandle.add">
+<code class="sig-name descname">add</code><span class="sig-paren">(</span><em class="sig-param">value</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/opentelemetry/sdk/metrics.html#CounterHandle.add"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#opentelemetry.sdk.metrics.CounterHandle.add" title="Permalink to this definition">¶</a></dt>
+<dd><p>See <a class="reference internal" href="opentelemetry.metrics.html#opentelemetry.metrics.CounterHandle.add" title="opentelemetry.metrics.CounterHandle.add"><code class="xref any py py-meth docutils literal notranslate"><span class="pre">opentelemetry.metrics.CounterHandle.add</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="opentelemetry.sdk.metrics.GaugeHandle">
+<em class="property">class </em><code class="sig-prename descclassname">opentelemetry.sdk.metrics.</code><code class="sig-name descname">GaugeHandle</code><span class="sig-paren">(</span><em class="sig-param">value_type</em>, <em class="sig-param">enabled</em>, <em class="sig-param">monotonic</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/opentelemetry/sdk/metrics.html#GaugeHandle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#opentelemetry.sdk.metrics.GaugeHandle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="opentelemetry.metrics.html#opentelemetry.metrics.GaugeHandle" title="opentelemetry.metrics.GaugeHandle"><code class="xref py py-class docutils literal notranslate"><span class="pre">opentelemetry.metrics.GaugeHandle</span></code></a>, <a class="reference internal" href="#opentelemetry.sdk.metrics.BaseHandle" title="opentelemetry.sdk.metrics.BaseHandle"><code class="xref py py-class docutils literal notranslate"><span class="pre">opentelemetry.sdk.metrics.BaseHandle</span></code></a></p>
+<dl class="method">
+<dt id="opentelemetry.sdk.metrics.GaugeHandle.set">
+<code class="sig-name descname">set</code><span class="sig-paren">(</span><em class="sig-param">value</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/opentelemetry/sdk/metrics.html#GaugeHandle.set"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#opentelemetry.sdk.metrics.GaugeHandle.set" title="Permalink to this definition">¶</a></dt>
+<dd><p>See <a class="reference internal" href="opentelemetry.metrics.html#opentelemetry.metrics.GaugeHandle.set" title="opentelemetry.metrics.GaugeHandle.set"><code class="xref any py py-meth docutils literal notranslate"><span class="pre">opentelemetry.metrics.GaugeHandle.set</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="opentelemetry.sdk.metrics.MeasureHandle">
+<em class="property">class </em><code class="sig-prename descclassname">opentelemetry.sdk.metrics.</code><code class="sig-name descname">MeasureHandle</code><span class="sig-paren">(</span><em class="sig-param">value_type</em>, <em class="sig-param">enabled</em>, <em class="sig-param">monotonic</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/opentelemetry/sdk/metrics.html#MeasureHandle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#opentelemetry.sdk.metrics.MeasureHandle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="opentelemetry.metrics.html#opentelemetry.metrics.MeasureHandle" title="opentelemetry.metrics.MeasureHandle"><code class="xref py py-class docutils literal notranslate"><span class="pre">opentelemetry.metrics.MeasureHandle</span></code></a>, <a class="reference internal" href="#opentelemetry.sdk.metrics.BaseHandle" title="opentelemetry.sdk.metrics.BaseHandle"><code class="xref py py-class docutils literal notranslate"><span class="pre">opentelemetry.sdk.metrics.BaseHandle</span></code></a></p>
+<dl class="method">
+<dt id="opentelemetry.sdk.metrics.MeasureHandle.record">
+<code class="sig-name descname">record</code><span class="sig-paren">(</span><em class="sig-param">value</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/opentelemetry/sdk/metrics.html#MeasureHandle.record"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#opentelemetry.sdk.metrics.MeasureHandle.record" title="Permalink to this definition">¶</a></dt>
+<dd><p>See <a class="reference internal" href="opentelemetry.metrics.html#opentelemetry.metrics.MeasureHandle.record" title="opentelemetry.metrics.MeasureHandle.record"><code class="xref any py py-meth docutils literal notranslate"><span class="pre">opentelemetry.metrics.MeasureHandle.record</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="opentelemetry.sdk.metrics.Metric">
+<em class="property">class </em><code class="sig-prename descclassname">opentelemetry.sdk.metrics.</code><code class="sig-name descname">Metric</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">description</em>, <em class="sig-param">unit</em>, <em class="sig-param">value_type</em>, <em class="sig-param">label_keys=()</em>, <em class="sig-param">enabled=True</em>, <em class="sig-param">monotonic=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/opentelemetry/sdk/metrics.html#Metric"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#opentelemetry.sdk.metrics.Metric" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="opentelemetry.metrics.html#opentelemetry.metrics.Metric" title="opentelemetry.metrics.Metric"><code class="xref py py-class docutils literal notranslate"><span class="pre">opentelemetry.metrics.Metric</span></code></a></p>
+<p>See <a class="reference internal" href="opentelemetry.metrics.html#opentelemetry.metrics.Metric" title="opentelemetry.metrics.Metric"><code class="xref any py py-class docutils literal notranslate"><span class="pre">opentelemetry.metrics.Metric</span></code></a>.</p>
+<dl class="attribute">
+<dt id="opentelemetry.sdk.metrics.Metric.HANDLE_TYPE">
+<code class="sig-name descname">HANDLE_TYPE</code><a class="headerlink" href="#opentelemetry.sdk.metrics.Metric.HANDLE_TYPE" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#opentelemetry.sdk.metrics.BaseHandle" title="opentelemetry.sdk.metrics.BaseHandle"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseHandle</span></code></a></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="opentelemetry.sdk.metrics.Metric.get_handle">
+<code class="sig-name descname">get_handle</code><span class="sig-paren">(</span><em class="sig-param">label_set</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/opentelemetry/sdk/metrics.html#Metric.get_handle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#opentelemetry.sdk.metrics.Metric.get_handle" title="Permalink to this definition">¶</a></dt>
+<dd><p>See <a class="reference internal" href="opentelemetry.metrics.html#opentelemetry.metrics.Metric.get_handle" title="opentelemetry.metrics.Metric.get_handle"><code class="xref any py py-meth docutils literal notranslate"><span class="pre">opentelemetry.metrics.Metric.get_handle</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#opentelemetry.sdk.metrics.BaseHandle" title="opentelemetry.sdk.metrics.BaseHandle"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseHandle</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="opentelemetry.sdk.metrics.Metric.UPDATE_FUNCTION">
+<code class="sig-name descname">UPDATE_FUNCTION</code><span class="sig-paren">(</span><em class="sig-param">y</em><span class="sig-paren">)</span><a class="headerlink" href="#opentelemetry.sdk.metrics.Metric.UPDATE_FUNCTION" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="opentelemetry.sdk.metrics.Counter">
+<em class="property">class </em><code class="sig-prename descclassname">opentelemetry.sdk.metrics.</code><code class="sig-name descname">Counter</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">description</em>, <em class="sig-param">unit</em>, <em class="sig-param">value_type</em>, <em class="sig-param">label_keys=()</em>, <em class="sig-param">enabled=True</em>, <em class="sig-param">monotonic=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/opentelemetry/sdk/metrics.html#Counter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#opentelemetry.sdk.metrics.Counter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#opentelemetry.sdk.metrics.Metric" title="opentelemetry.sdk.metrics.Metric"><code class="xref py py-class docutils literal notranslate"><span class="pre">opentelemetry.sdk.metrics.Metric</span></code></a>, <a class="reference internal" href="opentelemetry.metrics.html#opentelemetry.metrics.Counter" title="opentelemetry.metrics.Counter"><code class="xref py py-class docutils literal notranslate"><span class="pre">opentelemetry.metrics.Counter</span></code></a></p>
+<p>See <a class="reference internal" href="opentelemetry.metrics.html#opentelemetry.metrics.Counter" title="opentelemetry.metrics.Counter"><code class="xref any py py-class docutils literal notranslate"><span class="pre">opentelemetry.metrics.Counter</span></code></a>.</p>
+<p>By default, counter values can only go up (monotonic). Negative inputs
+will be discarded for monotonic counter metrics. Counter metrics that
+have a monotonic option set to False allows negative inputs.</p>
+<dl class="attribute">
+<dt id="opentelemetry.sdk.metrics.Counter.HANDLE_TYPE">
+<code class="sig-name descname">HANDLE_TYPE</code><a class="headerlink" href="#opentelemetry.sdk.metrics.Counter.HANDLE_TYPE" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#opentelemetry.sdk.metrics.CounterHandle" title="opentelemetry.sdk.metrics.CounterHandle"><code class="xref py py-class docutils literal notranslate"><span class="pre">CounterHandle</span></code></a></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="opentelemetry.sdk.metrics.Counter.add">
+<code class="sig-name descname">add</code><span class="sig-paren">(</span><em class="sig-param">label_set</em>, <em class="sig-param">value</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/opentelemetry/sdk/metrics.html#Counter.add"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#opentelemetry.sdk.metrics.Counter.add" title="Permalink to this definition">¶</a></dt>
+<dd><p>See <a class="reference internal" href="opentelemetry.metrics.html#opentelemetry.metrics.Counter.add" title="opentelemetry.metrics.Counter.add"><code class="xref any py py-meth docutils literal notranslate"><span class="pre">opentelemetry.metrics.Counter.add</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="opentelemetry.sdk.metrics.Counter.UPDATE_FUNCTION">
+<code class="sig-name descname">UPDATE_FUNCTION</code><span class="sig-paren">(</span><em class="sig-param">label_set</em>, <em class="sig-param">value</em><span class="sig-paren">)</span><a class="headerlink" href="#opentelemetry.sdk.metrics.Counter.UPDATE_FUNCTION" title="Permalink to this definition">¶</a></dt>
+<dd><p>See <a class="reference internal" href="opentelemetry.metrics.html#opentelemetry.metrics.Counter.add" title="opentelemetry.metrics.Counter.add"><code class="xref any py py-meth docutils literal notranslate"><span class="pre">opentelemetry.metrics.Counter.add</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="opentelemetry.sdk.metrics.Gauge">
+<em class="property">class </em><code class="sig-prename descclassname">opentelemetry.sdk.metrics.</code><code class="sig-name descname">Gauge</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">description</em>, <em class="sig-param">unit</em>, <em class="sig-param">value_type</em>, <em class="sig-param">label_keys=()</em>, <em class="sig-param">enabled=True</em>, <em class="sig-param">monotonic=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/opentelemetry/sdk/metrics.html#Gauge"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#opentelemetry.sdk.metrics.Gauge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#opentelemetry.sdk.metrics.Metric" title="opentelemetry.sdk.metrics.Metric"><code class="xref py py-class docutils literal notranslate"><span class="pre">opentelemetry.sdk.metrics.Metric</span></code></a>, <a class="reference internal" href="opentelemetry.metrics.html#opentelemetry.metrics.Gauge" title="opentelemetry.metrics.Gauge"><code class="xref py py-class docutils literal notranslate"><span class="pre">opentelemetry.metrics.Gauge</span></code></a></p>
+<p>See <a class="reference internal" href="opentelemetry.metrics.html#opentelemetry.metrics.Gauge" title="opentelemetry.metrics.Gauge"><code class="xref any py py-class docutils literal notranslate"><span class="pre">opentelemetry.metrics.Gauge</span></code></a>.</p>
+<p>By default, gauge values can go both up and down (non-monotonic).
+Negative inputs will be discarded for monotonic gauge metrics.</p>
+<dl class="attribute">
+<dt id="opentelemetry.sdk.metrics.Gauge.HANDLE_TYPE">
+<code class="sig-name descname">HANDLE_TYPE</code><a class="headerlink" href="#opentelemetry.sdk.metrics.Gauge.HANDLE_TYPE" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#opentelemetry.sdk.metrics.GaugeHandle" title="opentelemetry.sdk.metrics.GaugeHandle"><code class="xref py py-class docutils literal notranslate"><span class="pre">GaugeHandle</span></code></a></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="opentelemetry.sdk.metrics.Gauge.set">
+<code class="sig-name descname">set</code><span class="sig-paren">(</span><em class="sig-param">label_set</em>, <em class="sig-param">value</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/opentelemetry/sdk/metrics.html#Gauge.set"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#opentelemetry.sdk.metrics.Gauge.set" title="Permalink to this definition">¶</a></dt>
+<dd><p>See <a class="reference internal" href="opentelemetry.metrics.html#opentelemetry.metrics.Gauge.set" title="opentelemetry.metrics.Gauge.set"><code class="xref any py py-meth docutils literal notranslate"><span class="pre">opentelemetry.metrics.Gauge.set</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="opentelemetry.sdk.metrics.Gauge.UPDATE_FUNCTION">
+<code class="sig-name descname">UPDATE_FUNCTION</code><span class="sig-paren">(</span><em class="sig-param">label_set</em>, <em class="sig-param">value</em><span class="sig-paren">)</span><a class="headerlink" href="#opentelemetry.sdk.metrics.Gauge.UPDATE_FUNCTION" title="Permalink to this definition">¶</a></dt>
+<dd><p>See <a class="reference internal" href="opentelemetry.metrics.html#opentelemetry.metrics.Gauge.set" title="opentelemetry.metrics.Gauge.set"><code class="xref any py py-meth docutils literal notranslate"><span class="pre">opentelemetry.metrics.Gauge.set</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="opentelemetry.sdk.metrics.Measure">
+<em class="property">class </em><code class="sig-prename descclassname">opentelemetry.sdk.metrics.</code><code class="sig-name descname">Measure</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">description</em>, <em class="sig-param">unit</em>, <em class="sig-param">value_type</em>, <em class="sig-param">label_keys=()</em>, <em class="sig-param">enabled=False</em>, <em class="sig-param">monotonic=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/opentelemetry/sdk/metrics.html#Measure"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#opentelemetry.sdk.metrics.Measure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#opentelemetry.sdk.metrics.Metric" title="opentelemetry.sdk.metrics.Metric"><code class="xref py py-class docutils literal notranslate"><span class="pre">opentelemetry.sdk.metrics.Metric</span></code></a>, <a class="reference internal" href="opentelemetry.metrics.html#opentelemetry.metrics.Measure" title="opentelemetry.metrics.Measure"><code class="xref py py-class docutils literal notranslate"><span class="pre">opentelemetry.metrics.Measure</span></code></a></p>
+<p>See <a class="reference internal" href="opentelemetry.metrics.html#opentelemetry.metrics.Measure" title="opentelemetry.metrics.Measure"><code class="xref any py py-class docutils literal notranslate"><span class="pre">opentelemetry.metrics.Measure</span></code></a>.</p>
+<p>By default, measure metrics can accept both positive and negatives.
+Negative inputs will be discarded when monotonic is True.</p>
+<dl class="attribute">
+<dt id="opentelemetry.sdk.metrics.Measure.HANDLE_TYPE">
+<code class="sig-name descname">HANDLE_TYPE</code><a class="headerlink" href="#opentelemetry.sdk.metrics.Measure.HANDLE_TYPE" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#opentelemetry.sdk.metrics.MeasureHandle" title="opentelemetry.sdk.metrics.MeasureHandle"><code class="xref py py-class docutils literal notranslate"><span class="pre">MeasureHandle</span></code></a></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="opentelemetry.sdk.metrics.Measure.record">
+<code class="sig-name descname">record</code><span class="sig-paren">(</span><em class="sig-param">label_set</em>, <em class="sig-param">value</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/opentelemetry/sdk/metrics.html#Measure.record"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#opentelemetry.sdk.metrics.Measure.record" title="Permalink to this definition">¶</a></dt>
+<dd><p>See <a class="reference internal" href="opentelemetry.metrics.html#opentelemetry.metrics.Measure.record" title="opentelemetry.metrics.Measure.record"><code class="xref any py py-meth docutils literal notranslate"><span class="pre">opentelemetry.metrics.Measure.record</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="opentelemetry.sdk.metrics.Measure.UPDATE_FUNCTION">
+<code class="sig-name descname">UPDATE_FUNCTION</code><span class="sig-paren">(</span><em class="sig-param">label_set</em>, <em class="sig-param">value</em><span class="sig-paren">)</span><a class="headerlink" href="#opentelemetry.sdk.metrics.Measure.UPDATE_FUNCTION" title="Permalink to this definition">¶</a></dt>
+<dd><p>See <a class="reference internal" href="opentelemetry.metrics.html#opentelemetry.metrics.Measure.record" title="opentelemetry.metrics.Measure.record"><code class="xref any py py-meth docutils literal notranslate"><span class="pre">opentelemetry.metrics.Measure.record</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="opentelemetry.sdk.metrics.Meter">
+<em class="property">class </em><code class="sig-prename descclassname">opentelemetry.sdk.metrics.</code><code class="sig-name descname">Meter</code><a class="reference internal" href="_modules/opentelemetry/sdk/metrics.html#Meter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#opentelemetry.sdk.metrics.Meter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="opentelemetry.metrics.html#opentelemetry.metrics.Meter" title="opentelemetry.metrics.Meter"><code class="xref py py-class docutils literal notranslate"><span class="pre">opentelemetry.metrics.Meter</span></code></a></p>
+<p>See <a class="reference internal" href="opentelemetry.metrics.html#opentelemetry.metrics.Meter" title="opentelemetry.metrics.Meter"><code class="xref any py py-class docutils literal notranslate"><span class="pre">opentelemetry.metrics.Meter</span></code></a>.</p>
+<dl class="method">
+<dt id="opentelemetry.sdk.metrics.Meter.record_batch">
+<code class="sig-name descname">record_batch</code><span class="sig-paren">(</span><em class="sig-param">label_set</em>, <em class="sig-param">record_tuples</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/opentelemetry/sdk/metrics.html#Meter.record_batch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#opentelemetry.sdk.metrics.Meter.record_batch" title="Permalink to this definition">¶</a></dt>
+<dd><p>See <a class="reference internal" href="opentelemetry.metrics.html#opentelemetry.metrics.Meter.record_batch" title="opentelemetry.metrics.Meter.record_batch"><code class="xref any py py-meth docutils literal notranslate"><span class="pre">opentelemetry.metrics.Meter.record_batch</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="opentelemetry.sdk.metrics.Meter.create_metric">
+<code class="sig-name descname">create_metric</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">description</em>, <em class="sig-param">unit</em>, <em class="sig-param">value_type</em>, <em class="sig-param">metric_type</em>, <em class="sig-param">label_keys=()</em>, <em class="sig-param">enabled=True</em>, <em class="sig-param">monotonic=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/opentelemetry/sdk/metrics.html#Meter.create_metric"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#opentelemetry.sdk.metrics.Meter.create_metric" title="Permalink to this definition">¶</a></dt>
+<dd><p>See <a class="reference internal" href="opentelemetry.metrics.html#opentelemetry.metrics.Meter.create_metric" title="opentelemetry.metrics.Meter.create_metric"><code class="xref any py py-meth docutils literal notranslate"><span class="pre">opentelemetry.metrics.Meter.create_metric</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>~MetricT</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="opentelemetry.sdk.metrics.Meter.get_label_set">
+<code class="sig-name descname">get_label_set</code><span class="sig-paren">(</span><em class="sig-param">labels</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/opentelemetry/sdk/metrics.html#Meter.get_label_set"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#opentelemetry.sdk.metrics.Meter.get_label_set" title="Permalink to this definition">¶</a></dt>
+<dd><p>See <a class="reference internal" href="opentelemetry.metrics.html#opentelemetry.metrics.Meter.create_metric" title="opentelemetry.metrics.Meter.create_metric"><code class="xref any py py-meth docutils literal notranslate"><span class="pre">opentelemetry.metrics.Meter.create_metric</span></code></a>.</p>
+<p>This implementation encodes the labels to use as a map key.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>labels</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]) – The dictionary of label keys to label values.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="opentelemetry.sdk.trace.html" class="btn btn-neutral float-right" title="opentelemetry.sdk.trace package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="opentelemetry.sdk.context.html" class="btn btn-neutral float-left" title="opentelemetry.sdk.context" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, OpenTelemetry Authors
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
