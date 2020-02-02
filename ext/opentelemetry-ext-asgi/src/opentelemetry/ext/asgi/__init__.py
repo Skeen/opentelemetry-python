@@ -30,15 +30,19 @@ _HTTP_VERSION_PREFIX = "HTTP/"
 def get_header_from_scope(
     scope: dict, header_name: str
 ) -> typing.List[str]:
-    headers = scope.get('headers')
     print(header_name)
+    headers = scope.get('headers')
     print("headers", headers)
+    string_headers = map(
+        lambda tup: tuple(map(lambda x: x.decode('utf8'), tup)), headers
+    )
+    print("string_headers", string_headers)
+    filtered_headers = filter(
+        lambda tup: tup[0] == header_name, string_headers
+    )
+    print("filtered_headers", filtered_headers)
     result = list(map(
-        lambda tup: tup[1],
-        filter(
-            lambda tup: tup[0] == header_name,
-            headers
-        )
+        lambda tup: tup[1], filtered_headers
     ))
     print("parent_header", result)
     return result
