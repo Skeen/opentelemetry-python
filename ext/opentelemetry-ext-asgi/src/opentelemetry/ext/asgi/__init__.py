@@ -31,6 +31,7 @@ def get_header_from_scope(
     scope: dict, header_name: str
 ) -> typing.List[str]:
     headers = scope.get('headers')
+    print(header_name)
     print("headers", headers)
     result = list(map(
         lambda tup: tup[1],
@@ -59,7 +60,7 @@ def collect_request_attributes(scope):
         "http.port": scope.get("server")[1],
     }
 
-    target = scope.get("raw_path")
+    target = scope.get("path")
     if target is not None:
         result["http.target"] = target
 
