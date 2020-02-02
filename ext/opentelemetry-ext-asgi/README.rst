@@ -18,19 +18,19 @@ Installation
     pip install opentelemetry-ext-asgi
 
 
-Usage (Flask)
+Usage (Quart)
 -------------
 
 .. code-block:: python
 
-    from flask import Flask
+    from quart import Quart
     from opentelemetry.ext.asgi import OpenTelemetryMiddleware
 
-    app = Flask(__name__)
+    app = Quart(__name__)
     app.asgi_app = OpenTelemetryMiddleware(app.asgi_app)
 
     @app.route("/")
-    def hello():
+    async def hello():
         return "Hello!"
 
     if __name__ == "__main__":

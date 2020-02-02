@@ -31,14 +31,43 @@ def get_header_from_scope(
     scope: dict, header_name: str
 ) -> typing.List[str]:
     headers = scope.get('headers')
-    for key, value in headers:
-        if key == header_name:
-            return [value]
-    return []
+    print("headers", headers)
+    result = map(
+        lambda (key, value): value,
+        filter(
+            lambda (key, value): key == header_name,
+            headers
+        )
+    )
+    print("parent_header", result)
+    return result
 
 
 def get_default_span_name(scope):
     return scope.get("path", "/")
+
+
+def collect_request_attributes(scope):
+    """Collects HTTP request attributes, and returns a dictionary to be used as span creation attributes."""
+
+    result = {
+        "component": scope.get("type"),
+        "http.method": scope.get("method"),
+        "http.server_name": ":".join(scope.get("server")),
+        "http.scheme": scope.get("scheme"),
+        "http.host": scope.get("server")[0],
+        "http.port": scope.get("server")[1],
+    }
+
+    target = scope.get("raw_path")
+    if target is not None:
+        result["http.target"] = target
+
+    flavor = scope.get("http_version")
+    if flavor:
+        result["http.flavor"] = flavor
+
+    return result
 
 
 class OpenTelemetryMiddleware:
@@ -53,13 +82,14 @@ class OpenTelemetryMiddleware:
 
     async def __call__(self, scope, receive, send):
         parent_span = propagators.extract(get_header_from_scope, scope)
+        print("parent_span", parent_span)
         span_name = get_default_span_name(scope)
 
         span = self.tracer.start_span(
             span_name,
             parent_span,
             kind=trace.SpanKind.SERVER,
-            attributes={}#collect_request_attributes(scope),
+            attributes=collect_request_attributes(scope),
         )
 
         try:
