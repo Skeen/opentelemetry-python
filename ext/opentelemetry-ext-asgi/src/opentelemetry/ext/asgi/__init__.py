@@ -33,9 +33,9 @@ def get_header_from_scope(
     headers = scope.get('headers')
     print("headers", headers)
     result = list(map(
-        lambda key, value: value,
+        lambda tup: tup[1],
         filter(
-            lambda key, value: key == header_name,
+            lambda tup: tup[0] == header_name,
             headers
         )
     ))
