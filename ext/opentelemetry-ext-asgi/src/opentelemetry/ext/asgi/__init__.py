@@ -53,7 +53,7 @@ def collect_request_attributes(scope):
     result = {
         "component": scope.get("type"),
         "http.method": scope.get("method"),
-        "http.server_name": ":".join(scope.get("server")),
+        "http.server_name": ":".join(map(str, scope.get("server"))),
         "http.scheme": scope.get("scheme"),
         "http.host": scope.get("server")[0],
         "http.port": scope.get("server")[1],
