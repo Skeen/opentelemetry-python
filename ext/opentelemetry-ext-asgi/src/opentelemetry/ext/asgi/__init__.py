@@ -33,13 +33,13 @@ def get_header_from_scope(
     print(header_name)
     headers = scope.get('headers')
     print("headers", headers)
-    string_headers = map(
+    string_headers = list(map(
         lambda tup: tuple(map(lambda x: x.decode('utf8'), tup)), headers
-    )
+    ))
     print("string_headers", string_headers)
-    filtered_headers = filter(
+    filtered_headers = list(filter(
         lambda tup: tup[0] == header_name, string_headers
-    )
+    ))
     print("filtered_headers", filtered_headers)
     result = list(map(
         lambda tup: tup[1], filtered_headers
