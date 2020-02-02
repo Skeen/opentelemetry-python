@@ -32,13 +32,13 @@ def get_header_from_scope(
 ) -> typing.List[str]:
     headers = scope.get('headers')
     print("headers", headers)
-    result = map(
+    result = list(map(
         lambda key, value: value,
         filter(
             lambda key, value: key == header_name,
             headers
         )
-    )
+    ))
     print("parent_header", result)
     return result
 
