@@ -98,19 +98,18 @@ class OpenTelemetryMiddleware:
                     )
                     try:
                         with self.tracer.use_span(receive_span):
+                            payload = await receive()
                             if payload['type'] == "websocket.receive":
                                 receive_span.set_attribute("http.status_code", 200)
                                 receive_span.set_status(Status(http_status_to_canonical_code(200)))
                                 receive_span.set_attribute("http.status_text", payload['text'])
-
                             receive_span.update_name(span_name + " (" + payload['type'] + ")")
                             receive_span.set_attribute('type', payload['type'])
-                            payload = await receive()
-                            receive_span.end()
-                        except:
-                            # TODO Set span status (cf. https://github.com/open-telemetry/opentelemetry-python/issues/292)
-                            receive_span.end()
-                            raise
+                        receive_span.end()
+                    except:
+                        # TODO Set span status (cf. https://github.com/open-telemetry/opentelemetry-python/issues/292)
+                        receive_span.end()
+                        raise
                     return payload
 
                 async def wrapped_send(payload):
