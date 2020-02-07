@@ -122,12 +122,14 @@ class OpenTelemetryMiddleware:
                                 )
                             )
                         else:
+                            send_span.set_attribute("status_code", status_code)
                             send_span.set_attribute("http.status_code", status_code)
                             send_span.set_status(Status(http_status_to_canonical_code(status_code)))
                     elif payload['type'] == "websocket.receive" or payload['type'] == "websocket.send":
+                        send_span.set_attribute("status_code", 200)
                         send_span.set_attribute("http.status_code", 200)
                         send_span.set_status(Status(http_status_to_canonical_code(200)))
-                        send_span.set_attribute("http.status_text", payload['message'])
+                        send_span.set_attribute("http.status_text", payload['text'])
 
                     send_span.update_name(span_name + " (" + payload['type'] + ")")
                     send_span.set_attribute('type', payload['type'])
