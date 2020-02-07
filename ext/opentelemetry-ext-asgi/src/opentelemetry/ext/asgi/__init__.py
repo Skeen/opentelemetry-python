@@ -118,4 +118,4 @@ class OpenTelemetryMiddleware:
                     send_span.update_name(span_name + " (" + payload['type'] + ")")
                     send_span.set_attribute('type', payload['type'])
                     await send(payload)
-            await self.asgi(scope)(wrapped_receive, wrapped_send)
+            await self.asgi(scope, wrapped_receive, wrapped_send)
