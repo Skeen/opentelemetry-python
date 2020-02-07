@@ -77,48 +77,22 @@ class OpenTelemetryMiddleware:
 
     async def __call__(self, scope, receive, send):
         parent_span = propagators.extract(get_header_from_scope, scope)
-        print("parent_span", parent_span)
         span_name = get_default_span_name(scope)
 
-        span = self.tracer.start_span(
-            span_name,
-            parent_span,
-            kind=trace.SpanKind.SERVER,
-            attributes=collect_request_attributes(scope),
-        )
+        with self.tracer.start_as_current_span(span_name, parent_span, kind=trace.SpanKind.SERVER, attributes=collect_request_attributes(scope)):
+            async def wrapped_receive():
+                with self.tracer.start_as_current_span(span_name + " (unknown-receive)") as receive_span:
+                    payload = await receive()
+                    if payload['type'] == "websocket.receive":
+                        receive_span.set_attribute("http.status_code", 200)
+                        receive_span.set_status(Status(http_status_to_canonical_code(200)))
+                        receive_span.set_attribute("http.status_text", payload['text'])
+                    receive_span.update_name(span_name + " (" + payload['type'] + ")")
+                    receive_span.set_attribute('type', payload['type'])
+                return payload
 
-        try:
-            with self.tracer.use_span(span):
-                async def wrapped_receive():
-                    receive_span = self.tracer.start_span(
-                        span_name + " (unknown-receive)",
-                        span,
-                        kind=trace.SpanKind.SERVER,
-                        attributes={},
-                    )
-                    try:
-                        with self.tracer.use_span(receive_span):
-                            payload = await receive()
-                            if payload['type'] == "websocket.receive":
-                                receive_span.set_attribute("http.status_code", 200)
-                                receive_span.set_status(Status(http_status_to_canonical_code(200)))
-                                receive_span.set_attribute("http.status_text", payload['text'])
-                            receive_span.update_name(span_name + " (" + payload['type'] + ")")
-                            receive_span.set_attribute('type', payload['type'])
-                        receive_span.end()
-                    except:
-                        # TODO Set span status (cf. https://github.com/open-telemetry/opentelemetry-python/issues/292)
-                        receive_span.end()
-                        raise
-                    return payload
-
-                async def wrapped_send(payload):
-                    send_span = self.tracer.start_span(
-                        span_name + " (unknown-send)",
-                        span,
-                        kind=trace.SpanKind.SERVER,
-                        attributes={},
-                    )
+            async def wrapped_send(payload):
+                with self.tracer.start_as_current_span(span_name + " (unknown-send)") as send_span:
                     if payload['type'] == "http.response.start":
                         status_code = payload['status']
                         try:
@@ -140,17 +114,5 @@ class OpenTelemetryMiddleware:
 
                     send_span.update_name(span_name + " (" + payload['type'] + ")")
                     send_span.set_attribute('type', payload['type'])
-                    try:
-                        with self.tracer.use_span(send_span):
-                            await send(payload)
-                        send_span.end()
-                    except:
-                        # TODO Set span status (cf. https://github.com/open-telemetry/opentelemetry-python/issues/292)
-                        send_span.end()
-                        raise
-                await self.asgi(scope)(wrapped_receive, wrapped_send)
-                span.end()
-        except:  # noqa
-            # TODO Set span status (cf. https://github.com/open-telemetry/opentelemetry-python/issues/292)
-            span.end()
-            raise
+                    await send(payload)
+            await self.asgi(scope)(wrapped_receive, wrapped_send)
