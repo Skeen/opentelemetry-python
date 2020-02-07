@@ -23,6 +23,7 @@ import typing
 from opentelemetry import propagators, trace
 from opentelemetry.ext.asgi.version import __version__  # noqa
 from opentelemetry.trace.status import Status, StatusCanonicalCode
+from opentelemetry.ext.wsgi import http_status_to_canonical_code
 
 _HTTP_VERSION_PREFIX = "HTTP/"
 
@@ -90,24 +91,45 @@ class OpenTelemetryMiddleware:
             with self.tracer.use_span(span):
                 async def wrapped_receive():
                     receive_span = self.tracer.start_span(
-                        span_name + "(receive)",
+                        span_name + " (unknown-receive)",
                         span,
                         kind=trace.SpanKind.SERVER,
                         attributes={},
                     )
                     with self.tracer.use_span(receive_span):
                         payload = await receive()
+                    receive_span.update_name(span_name + " (" + payload['type'] + ")")
                     receive_span.set_attribute('type', payload['type'])
                     receive_span.end()
                     return payload
 
                 async def wrapped_send(payload):
                     send_span = self.tracer.start_span(
-                        span_name + "(send)",
+                        span_name + " (unknown-send)",
                         span,
                         kind=trace.SpanKind.SERVER,
                         attributes={},
                     )
+                    if payload['type'] == "http.response.start":
+                        status_code = payload['status']
+                        try:
+                            status_code = int(status_code)
+                        except ValueError:
+                            span.set_status(
+                                Status(
+                                    StatusCanonicalCode.UNKNOWN,
+                                    "Non-integer HTTP status: " + repr(status_code),
+                                )
+                            )
+                        else:
+                            span.set_attribute("http.status_code", status_code)
+                            span.set_status(Status(http_status_to_canonical_code(status_code)))
+                    elif payload['type'] == "websocket.receive" or payload['type'] == "websocket.send":
+                        span.set_attribute("http.status_code", 200)
+                        span.set_status(Status(http_status_to_canonical_code(200)))
+                        span.set_attribute("http.status_text", payload['message'])
+
+                    send_span.update_name(span_name + " (" + payload['type'] + ")")
                     send_span.set_attribute('type', payload['type'])
                     with self.tracer.use_span(send_span):
                         await send(payload)
