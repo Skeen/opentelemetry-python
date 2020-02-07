@@ -17,7 +17,7 @@ The opentelemetry-ext-wsgi package provides a WSGI middleware that can be used
 on any WSGI framework (such as Django / Flask) to track requests timing through
 OpenTelemetry.
 """
-
+import operator
 import typing
 
 from opentelemetry import propagators, trace
@@ -30,22 +30,11 @@ _HTTP_VERSION_PREFIX = "HTTP/"
 def get_header_from_scope(
     scope: dict, header_name: str
 ) -> typing.List[str]:
-    print(header_name)
     headers = scope.get('headers')
-    print("headers", headers)
-    string_headers = list(map(
-        lambda tup: tuple(map(lambda x: x.decode('utf8'), tup)), headers
-    ))
-    print("string_headers", string_headers)
-    filtered_headers = list(filter(
-        lambda tup: tup[0] == header_name, string_headers
-    ))
-    print("filtered_headers", filtered_headers)
-    result = list(map(
-        lambda tup: tup[1], filtered_headers
-    ))
-    print("parent_header", result)
-    return result
+    return [
+        value.decode('utf8') for (key,value) in headers
+        if key.decode('utf8') == header_name
+    ]
 
 
 def get_default_span_name(scope):
