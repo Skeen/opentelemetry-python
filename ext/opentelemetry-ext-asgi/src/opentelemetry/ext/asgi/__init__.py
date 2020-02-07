@@ -98,6 +98,11 @@ class OpenTelemetryMiddleware:
                     )
                     with self.tracer.use_span(receive_span):
                         payload = await receive()
+                    if payload['type'] == "websocket.receive":
+                        receive_span.set_attribute("http.status_code", 200)
+                        receive_span.set_status(Status(http_status_to_canonical_code(200)))
+                        receive_span.set_attribute("http.status_text", payload['text'])
+
                     receive_span.update_name(span_name + " (" + payload['type'] + ")")
                     receive_span.set_attribute('type', payload['type'])
                     receive_span.end()
@@ -124,7 +129,7 @@ class OpenTelemetryMiddleware:
                         else:
                             send_span.set_attribute("http.status_code", status_code)
                             send_span.set_status(Status(http_status_to_canonical_code(status_code)))
-                    elif payload['type'] == "websocket.receive" or payload['type'] == "websocket.send":
+                    elif payload['type'] == "websocket.send":
                         send_span.set_attribute("http.status_code", 200)
                         send_span.set_status(Status(http_status_to_canonical_code(200)))
                         send_span.set_attribute("http.status_text", payload['text'])
