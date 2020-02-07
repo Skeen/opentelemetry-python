@@ -79,9 +79,11 @@ class OpenTelemetryMiddleware:
         parent_span = propagators.extract(get_header_from_scope, scope)
         span_name = get_default_span_name(scope)
 
-        with self.tracer.start_as_current_span(span_name, parent_span, kind=trace.SpanKind.SERVER, attributes=collect_request_attributes(scope)):
+        with self.tracer.start_as_current_span(span_name, parent_span, kind=trace.SpanKind.SERVER, attributes=collect_request_attributes(scope)) as connection_span:
+            print("connection", connection_span.get_context())
             async def wrapped_receive():
                 with self.tracer.start_as_current_span(span_name + " (unknown-receive)") as receive_span:
+                    print("wrapped_receive", receive_span.get_context())
                     payload = await receive()
                     if payload['type'] == "websocket.receive":
                         receive_span.set_attribute("http.status_code", 200)
@@ -93,6 +95,7 @@ class OpenTelemetryMiddleware:
 
             async def wrapped_send(payload):
                 with self.tracer.start_as_current_span(span_name + " (unknown-send)") as send_span:
+                    print("wrapped_send", send_span.get_context())
                     if payload['type'] == "http.response.start":
                         status_code = payload['status']
                         try:
