@@ -80,7 +80,7 @@ class OpenTelemetryMiddleware:
         span_name = get_default_span_name(scope)
 
         span = self.tracer.start_span(
-            span_name,
+            span_name + "(connection)",
             parent_span,
             kind=trace.SpanKind.SERVER,
             attributes=collect_request_attributes(scope),
@@ -97,6 +97,7 @@ class OpenTelemetryMiddleware:
                     )
                     with self.tracer.use_span(receive_span):
                         payload = await receive()
+                    receive_span.set_attribute('type', payload['type'])
                     receive_span.end()
                     return payload
 
@@ -107,6 +108,7 @@ class OpenTelemetryMiddleware:
                         kind=trace.SpanKind.SERVER,
                         attributes={},
                     )
+                    send_span.set_attribute('type', payload['type'])
                     with self.tracer.use_span(send_span):
                         await send(payload)
                     send_span.end()
