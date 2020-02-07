@@ -88,7 +88,29 @@ class OpenTelemetryMiddleware:
 
         try:
             with self.tracer.use_span(span):
-                await self.asgi(scope)(receive, send)
+                async def wrapped_receive():
+                    receive_span = self.tracer.start_span(
+                        span_name + "(receive)",
+                        span,
+                        kind=trace.SpanKind.SERVER,
+                        attributes={},
+                    )
+                    with self.tracer.use_span(receive_span):
+                        payload = await receive()
+                    receive_span.end()
+                    return payload
+
+                async def wrapped_send(payload):
+                    send_span = self.tracer.start_span(
+                        span_name + "(send)",
+                        span,
+                        kind=trace.SpanKind.SERVER,
+                        attributes={},
+                    )
+                    with self.tracer.use_span(send_span):
+                        await send(payload)
+                    send_span.end()
+                await self.asgi(scope)(wrapped_receive, wrapped_send)
                 span.end()
         except:  # noqa
             # TODO Set span status (cf. https://github.com/open-telemetry/opentelemetry-python/issues/292)
