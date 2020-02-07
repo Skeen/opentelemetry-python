@@ -81,7 +81,7 @@ class OpenTelemetryMiddleware:
         span_name = get_default_span_name(scope)
 
         span = self.tracer.start_span(
-            span_name + "(connection)",
+            span_name,
             parent_span,
             kind=trace.SpanKind.SERVER,
             attributes=collect_request_attributes(scope),
@@ -115,19 +115,19 @@ class OpenTelemetryMiddleware:
                         try:
                             status_code = int(status_code)
                         except ValueError:
-                            span.set_status(
+                            send_span.set_status(
                                 Status(
                                     StatusCanonicalCode.UNKNOWN,
                                     "Non-integer HTTP status: " + repr(status_code),
                                 )
                             )
                         else:
-                            span.set_attribute("http.status_code", status_code)
-                            span.set_status(Status(http_status_to_canonical_code(status_code)))
+                            send_span.set_attribute("http.status_code", status_code)
+                            send_span.set_status(Status(http_status_to_canonical_code(status_code)))
                     elif payload['type'] == "websocket.receive" or payload['type'] == "websocket.send":
-                        span.set_attribute("http.status_code", 200)
-                        span.set_status(Status(http_status_to_canonical_code(200)))
-                        span.set_attribute("http.status_text", payload['message'])
+                        send_span.set_attribute("http.status_code", 200)
+                        send_span.set_status(Status(http_status_to_canonical_code(200)))
+                        send_span.set_attribute("http.status_text", payload['message'])
 
                     send_span.update_name(span_name + " (" + payload['type'] + ")")
                     send_span.set_attribute('type', payload['type'])
