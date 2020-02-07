@@ -69,10 +69,10 @@ class OpenTelemetryMiddleware:
     """The ASGI application middleware.
 
     Args:
-        asgi: The ASGI application callable to forward requests to.
+        app: The ASGI application callable to forward requests to.
     """
-    def __init__(self, asgi):
-        self.asgi = asgi
+    def __init__(self, app):
+        self.app = app
         self.tracer = trace.tracer_source().get_tracer(__name__, __version__)
 
     async def __call__(self, scope, receive, send):
@@ -118,4 +118,4 @@ class OpenTelemetryMiddleware:
                     send_span.update_name(span_name + " (" + payload['type'] + ")")
                     send_span.set_attribute('type', payload['type'])
                     await send(payload)
-            await self.asgi(scope, wrapped_receive, wrapped_send)
+            await self.app(scope, wrapped_receive, wrapped_send)
