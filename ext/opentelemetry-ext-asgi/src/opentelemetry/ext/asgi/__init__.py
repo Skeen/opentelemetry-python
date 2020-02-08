@@ -25,7 +25,6 @@ from asgiref.compatibility import guarantee_single_callable
 from opentelemetry import propagators, trace
 from opentelemetry.ext.asgi.version import __version__  # noqa
 from opentelemetry.trace.status import Status, StatusCanonicalCode
-from opentelemetry.ext.wsgi import http_status_to_canonical_code
 
 _HTTP_VERSION_PREFIX = "HTTP/"
 
@@ -42,6 +41,37 @@ def get_header_from_scope(
 
 def get_default_span_name(scope):
     return scope.get("path", "/")
+
+
+def http_status_to_canonical_code(code: int, allow_redirect: bool = True):
+    # pylint:disable=too-many-branches,too-many-return-statements
+    if code < 100:
+        return StatusCanonicalCode.UNKNOWN
+    if code <= 299:
+        return StatusCanonicalCode.OK
+    if code <= 399:
+        if allow_redirect:
+            return StatusCanonicalCode.OK
+        return StatusCanonicalCode.DEADLINE_EXCEEDED
+    if code <= 499:
+        if code == 401:  # HTTPStatus.UNAUTHORIZED:
+            return StatusCanonicalCode.UNAUTHENTICATED
+        if code == 403:  # HTTPStatus.FORBIDDEN:
+            return StatusCanonicalCode.PERMISSION_DENIED
+        if code == 404:  # HTTPStatus.NOT_FOUND:
+            return StatusCanonicalCode.NOT_FOUND
+        if code == 429:  # HTTPStatus.TOO_MANY_REQUESTS:
+            return StatusCanonicalCode.RESOURCE_EXHAUSTED
+        return StatusCanonicalCode.INVALID_ARGUMENT
+    if code <= 599:
+        if code == 501:  # HTTPStatus.NOT_IMPLEMENTED:
+            return StatusCanonicalCode.UNIMPLEMENTED
+        if code == 503:  # HTTPStatus.SERVICE_UNAVAILABLE:
+            return StatusCanonicalCode.UNAVAILABLE
+        if code == 504:  # HTTPStatus.GATEWAY_TIMEOUT:
+            return StatusCanonicalCode.DEADLINE_EXCEEDED
+        return StatusCanonicalCode.INTERNAL
+    return StatusCanonicalCode.UNKNOWN
 
 
 def collect_request_attributes(scope):
