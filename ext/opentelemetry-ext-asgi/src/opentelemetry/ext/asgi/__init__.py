@@ -48,15 +48,24 @@ def collect_request_attributes(scope):
     """Collects HTTP request attributes from the ASGI scope and returns a
     dictionary to be used as span creation attributes."""
 
+    port = scope.get("server")[1]
+    server_host = (
+        scope.get("server")[0] + (":" + str(port) if port != 80 else "")
+    )
+    http_url = scope.get("scheme") + "://" + server_host + scope.get("path")
+    if scope.get("query_string"):
+        http_url = http_url + ("?" + scope.get("query_string").decode("utf8"))
+
     result = {
         "component": scope.get("type"),
         "http.method": scope.get("method"),
         "http.server_name": scope.get("server")[0],
         "http.scheme": scope.get("scheme"),
-        "http.host": scope.get("server")[0],
-        "http.port": scope.get("server")[1],
+        "http.host": server_host,
+        "host.port": port,
         "http.flavor": scope.get("http_version"),
         "http.target": scope.get("path"),
+        "http.url": http_url,
     }
 
     if "client" in scope:
