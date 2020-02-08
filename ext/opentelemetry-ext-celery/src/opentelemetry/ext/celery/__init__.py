@@ -20,11 +20,10 @@ popular requests library.
 import functools
 from urllib.parse import urlparse
 
-from requests.sessions import Session
 
 from opentelemetry import propagators
 from opentelemetry.context import Context
-from opentelemetry.ext.http_requests.version import __version__
+from opentelemetry.ext.celery.version import __version__
 from opentelemetry.trace import SpanKind
 
 
