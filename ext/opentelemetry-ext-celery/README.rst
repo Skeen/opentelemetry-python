@@ -1,40 +1,31 @@
-OpenTelemetry requests integration
-==================================
+OpenTelemetry celery integration
+================================
 
 |pypi|
 
-.. |pypi| image:: https://badge.fury.io/py/opentelemetry-ext-http-requests.svg
-   :target: https://pypi.org/project/opentelemetry-ext-http-requests/
+.. |pypi| image:: https://badge.fury.io/py/opentelemetry-ext-celery.svg
+   :target: https://pypi.org/project/opentelemetry-ext-celery/
 
-This library allows tracing HTTP requests made by the popular `requests <https://requests.kennethreitz.org/en/master/>`_ library.
+This library allows tracing celery tasks made by the popular `celery <http://www.celeryproject.org/>`_ library.
 
 Installation
 ------------
 
 ::
 
-     pip install opentelemetry-ext-http-requests
+     pip install opentelemetry-ext-celery
 
 Usage
 -----
 
 .. code-block:: python
 
-    import requests
-    import opentelemetry.ext.http_requests
+    import celery
+    import opentelemetry.ext.celery
     from opentelemetry.trace import tracer_source
 
-    opentelemetry.ext.http_requests.enable(tracer_source())
-    response = requests.get(url='https://www.example.org/')
-
-Limitations
------------
-
-Note that calls that do not use the higher-level APIs but use
-:code:`requests.sessions.Session.send` (or an alias thereof) directly, are
-currently not traced. If you find any other way to trigger an untraced HTTP
-request, please report it via a GitHub issue with :code:`[requests: untraced
-API]` in the title.
+    opentelemetry.ext.celery.enable(tracer_source())
+    result = add.delay(2,3).get()
 
 References
 ----------
