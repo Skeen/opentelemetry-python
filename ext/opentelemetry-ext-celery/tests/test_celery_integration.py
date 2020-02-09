@@ -25,10 +25,15 @@ celery_output_folder = '/tmp/'
 
 # import opentelemetry.ext.celery as otel_celery
 from opentelemetry import trace
+from opentelemetry.ext.testutil.spantestutil import SpanTestBase
 import threading
 
+tracer = trace.tracer_source().get_tracer(__name__)
+with tracer.start_as_current_span('alfa') as span:
+    BinaryFormat.to_bytes(span.get_context())
 
-class CeleryIntegration(unittest.TestCase):
+
+class CeleryIntegration(SpanTestBase):
 
     @classmethod
     def setUpClass(cls):
@@ -59,20 +64,29 @@ class CeleryIntegration(unittest.TestCase):
         super().tearDownClass()
 
     def setUp(self):
+        super().setUp()
         # Disable: RuntimeError: Never call result.get() within a task!
         # See: https://github.com/celery/celery/issues/3189
         _set_task_join_will_block(False)
 
     def tearDown(self):
+        super().tearDown()
         _set_task_join_will_block(True)
 
     def test_add(self):
+        """Test that we can compute a task with our celery setup."""
+        # Validate task
         task_result = self.add.delay(2, 3)
         self.assertIsInstance(task_result, AsyncResult)
         result = task_result.get()
         self.assertIsInstance(result, int)
         self.assertEqual(result, 5)
+        # Check that no spans were created
+        span_list = self.memory_exporter.get_finished_spans()
+        self.assertEqual(len(span_list), 0)
 
+    def test_traced_add(self):
+        otel_celery.enable()
 
 
 

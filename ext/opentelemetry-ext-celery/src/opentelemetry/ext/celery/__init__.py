@@ -18,90 +18,132 @@ popular requests library.
 """
 
 import functools
-from urllib.parse import urlparse
-
 
 from opentelemetry import propagators
 from opentelemetry.context import Context
 from opentelemetry.ext.celery.version import __version__
 from opentelemetry.trace import SpanKind
+from opentelemetry.trace import SpanKind
 
 
-# NOTE: Currently we force passing a tracer. But in turn, this forces the user
-# to configure a SDK before enabling this integration. In turn, this means that
-# if the SDK/tracer is already using `requests` they may, in theory, bypass our
-# instrumentation when using `import from`, etc. (currently we only instrument
-# a instance method so the probability for that is very low).
-def enable(tracer_source):
-    """Enables tracing of all requests calls that go through
-      :code:`requests.session.Session.request` (this includes
-      :code:`requests.get`, etc.)."""
-
-    # Since
-    # https://github.com/psf/requests/commit/d72d1162142d1bf8b1b5711c664fbbd674f349d1
-    # (v0.7.0, Oct 23, 2011), get, post, etc are implemented via request which
-    # again, is implemented via Session.request (`Session` was named `session`
-    # before v1.0.0, Dec 17, 2012, see
-    # https://github.com/psf/requests/commit/4e5c4a6ab7bb0195dececdd19bb8505b872fe120)
-
-    # Guard against double instrumentation
-    disable()
-
-    tracer = tracer_source.get_tracer(__name__, __version__)
-
-    wrapped = Session.request
-
-    @functools.wraps(wrapped)
-    def instrumented_request(self, method, url, *args, **kwargs):
-        if Context.suppress_instrumentation:
-            return wrapped(self, method, url, *args, **kwargs)
-
-        # See
-        # https://github.com/open-telemetry/opentelemetry-specification/blob/master/specification/data-semantic-conventions.md#http-client
-        try:
-            parsed_url = urlparse(url)
-        except ValueError as exc:  # Invalid URL
-            path = "<Unparsable URL: {}>".format(exc)
-        else:
-            if parsed_url is None:
-                path = "<URL parses to None>"
-            path = parsed_url.path
-
-        with tracer.start_as_current_span(path, kind=SpanKind.CLIENT) as span:
-            span.set_attribute("component", "http")
-            span.set_attribute("http.method", method.upper())
-            span.set_attribute("http.url", url)
-
-            # TODO: Propagate the trace context via headers once we have a way
-            # to access propagators.
-
-            headers = kwargs.setdefault("headers", {})
-            propagators.inject(tracer, type(headers).__setitem__, headers)
-            result = wrapped(self, method, url, *args, **kwargs)  # *** PROCEED
-
-            span.set_attribute("http.status_code", result.status_code)
-            span.set_attribute("http.status_text", result.reason)
-
-            return result
-
-        # TODO: How to handle exceptions? Should we create events for them? Set
-        # certain attributes?
-
-    instrumented_request.opentelemetry_ext_requests_applied = True
-
-    Session.request = instrumented_request
-
-    # TODO: We should also instrument requests.sessions.Session.send
-    # but to avoid doubled spans, we would need some context-local
-    # state (i.e., only create a Span if the current context's URL is
-    # different, then push the current URL, pop it afterwards)
+from celery.app.task import Task
+from celery.signals import (
+    before_task_publish, task_prerun, task_success, task_failure
+)
 
 
-def disable():
-    """Disables instrumentation of :code:`requests` through this module.
+def before_task_publish_handler(headers, **kwargs):
+    headers['parent_span_context'] = {}
 
-    Note that this only works if no other module also patches requests."""
 
-    if getattr(Session.request, "opentelemetry_ext_requests_applied", False):
-        original = Session.request.__wrapped__  # pylint:disable=no-member
-        Session.request = original
+
+
+    opentracing.tracer.inject(span_context=get_current_span().context,
+                              format=opentracing.Format.TEXT_MAP,
+carrier=span_context)
+
+
+def finish_current_span(task, exc_type=None, exc_val=None, exc_tb=None):
+    task.request.span.finish()
+    task.request.tracing_context.__exit__(exc_type, exc_val, exc_tb)
+
+
+def task_success_handler(sender, **kwargs):
+    finish_current_span(task=sender)
+
+
+def task_failure_handler(sender, exception, traceback, **kwargs):
+    finish_current_span(
+        task=sender,
+        exc_type=type(exception),
+        exc_val=exception,
+        exc_tb=traceback,
+    )
+
+def enable():
+
+    before_task_publish.connect(before_task_publish_handler)
+    task_prerun.connect(task_prerun_handler)
+    task_success.connect(task_success_handler)
+    task_failure.connect(task_failure_handler)
+
+
+
+## NOTE: Currently we force passing a tracer. But in turn, this forces the user
+## to configure a SDK before enabling this integration. In turn, this means that
+## if the SDK/tracer is already using `requests` they may, in theory, bypass our
+## instrumentation when using `import from`, etc. (currently we only instrument
+## a instance method so the probability for that is very low).
+#def enable(tracer_source):
+#    """Enables tracing of all requests calls that go through
+#      :code:`requests.session.Session.request` (this includes
+#      :code:`requests.get`, etc.)."""
+#
+#    # Since
+#    # https://github.com/psf/requests/commit/d72d1162142d1bf8b1b5711c664fbbd674f349d1
+#    # (v0.7.0, Oct 23, 2011), get, post, etc are implemented via request which
+#    # again, is implemented via Session.request (`Session` was named `session`
+#    # before v1.0.0, Dec 17, 2012, see
+#    # https://github.com/psf/requests/commit/4e5c4a6ab7bb0195dececdd19bb8505b872fe120)
+#
+#    # Guard against double instrumentation
+#    disable()
+#
+#    tracer = tracer_source.get_tracer(__name__, __version__)
+#
+#    wrapped = Session.request
+#
+#    @functools.wraps(wrapped)
+#    def instrumented_request(self, method, url, *args, **kwargs):
+#        if Context.suppress_instrumentation:
+#            return wrapped(self, method, url, *args, **kwargs)
+#
+#        # See
+#        # https://github.com/open-telemetry/opentelemetry-specification/blob/master/specification/data-semantic-conventions.md#http-client
+#        try:
+#            parsed_url = urlparse(url)
+#        except ValueError as exc:  # Invalid URL
+#            path = "<Unparsable URL: {}>".format(exc)
+#        else:
+#            if parsed_url is None:
+#                path = "<URL parses to None>"
+#            path = parsed_url.path
+#
+#        with tracer.start_as_current_span(path, kind=SpanKind.CLIENT) as span:
+#            span.set_attribute("component", "http")
+#            span.set_attribute("http.method", method.upper())
+#            span.set_attribute("http.url", url)
+#
+#            # TODO: Propagate the trace context via headers once we have a way
+#            # to access propagators.
+#
+#            headers = kwargs.setdefault("headers", {})
+#            propagators.inject(tracer, type(headers).__setitem__, headers)
+#            result = wrapped(self, method, url, *args, **kwargs)  # *** PROCEED
+#
+#            span.set_attribute("http.status_code", result.status_code)
+#            span.set_attribute("http.status_text", result.reason)
+#
+#            return result
+#
+#        # TODO: How to handle exceptions? Should we create events for them? Set
+#        # certain attributes?
+#
+#    instrumented_request.opentelemetry_ext_requests_applied = True
+#
+#    Session.request = instrumented_request
+#
+#    # TODO: We should also instrument requests.sessions.Session.send
+#    # but to avoid doubled spans, we would need some context-local
+#    # state (i.e., only create a Span if the current context's URL is
+#    # different, then push the current URL, pop it afterwards)
+#
+#
+#def disable():
+#    """Disables instrumentation of :code:`requests` through this module.
+#
+#    Note that this only works if no other module also patches requests."""
+#
+#    if getattr(Session.request, "opentelemetry_ext_requests_applied", False):
+#        original = Session.request.__wrapped__  # pylint:disable=no-member
+#        Session.request = original
